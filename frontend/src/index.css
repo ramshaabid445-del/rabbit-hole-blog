@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #faf5f3;
+  color: #111a2b;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Responsive safety net: no image, form control or long card title is allowed
+   to make a page wider than the device viewport. */
+#root,
+.home-screen,
+.about-screen,
+.contact-screen,
+.categories-screen,
+.articles-screen,
+.article-detail-screen,
+.admin-dashboard {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  max-width: 100%;
+}
+
+.hero-container > *,
+.about-hero-container > *,
+.drives-container > *,
+.beyond-connect-container > *,
+.contact-container > *,
+.featured-content > *,
+.articles-grid-section .row > * {
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .navbar-logo {
+    font-size: clamp(17px, 5vw, 22px);
+  }
+
+  .subscribe-btn {
+    padding-inline: 14px;
+  }
+
+  .footer-wrapper {
+    padding-inline: 0;
+  }
+}
+
+::selection {
+  background: rgba(109, 116, 161, 0.3);
+  color: #fff;
+}

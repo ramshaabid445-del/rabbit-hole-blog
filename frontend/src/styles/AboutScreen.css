@@ -1,0 +1,787 @@
+/* ============ ABOUT SCREEN — Professional Blog About Page ============ */
+/* Contained card hero, story section, featured journey grid with overlays,
+   scientist cards with sharp edges, topics, and homepage-matching newsletter. */
+
+.about-screen {
+  width: 100%;
+  background: #faf5f3;
+  color: #111a2b;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ============ CONTAINER ============ */
+.about-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============ SHARED ============ */
+.about-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #8b5cf6;
+  margin-bottom: 14px;
+}
+
+.about-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: #111a2b;
+  margin-bottom: 18px;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.about-paragraph {
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(17, 26, 43, 0.65);
+  margin-bottom: 18px;
+  max-width: 620px;
+}
+
+.about-paragraph-center {
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(17, 26, 43, 0.65);
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ============ HERO — contained card (like articles page) ============ */
+
+.about-hero-section {
+  padding: 110px 40px 0;
+  background: #faf5f3;
+  text-align: center;
+}
+
+.about-hero-inner {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  min-height: clamp(360px, 62vh, 520px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(17, 26, 43, 0.88) 0%,
+      rgba(17, 26, 43, 0.7) 45%,
+      rgba(17, 26, 43, 0.4) 75%,
+      rgba(17, 26, 43, 0.15) 100%
+    ),
+    var(--about-hero-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(17, 26, 43, 0.88) 0%,
+    rgba(17, 26, 43, 0.7) 45%,
+    rgba(17, 26, 43, 0.4) 75%,
+    rgba(17, 26, 43, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+}
+
+.about-hero-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 28px;
+}
+
+.about-hero-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+
+.about-hero-sub {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.about-hero-sub br {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .about-hero-sub br {
+    display: inline;
+  }
+}
+
+/* ============ STORY SECTION ============ */
+
+.about-story-section {
+  padding: 90px 20px;
+  background: #faf5f3;
+}
+
+.about-story-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-story-text {
+  animation: aboutFadeIn 0.7s ease-out;
+}
+
+.about-signature {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 19px;
+  color: #8b5cf6;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.about-story-image {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.about-story-image img {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.about-story-image-border {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: -16px;
+  bottom: -16px;
+  border: 2px solid #8b5cf6;
+  z-index: 1;
+}
+
+/* ============ JOURNEY — Featured Magazine Style ============ */
+
+.about-journey-wrapper {
+  padding: 0 40px;
+  background: #faf5f3;
+}
+
+.about-journey-section {
+  padding: 80px 20px 90px;
+  background: #ffffff;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.about-journey-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.about-journey-desc {
+  font-size: 15px;
+  color: rgba(17, 26, 43, 0.55);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.about-journey-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
+
+.about-journey-card-featured {
+  grid-row: 1 / -1;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border: none;
+  cursor: pointer;
+}
+
+.about-journey-card-featured .about-journey-img {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+}
+
+.about-journey-card-featured .about-journey-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.about-journey-card-featured:hover .about-journey-img img {
+  transform: scale(1.06);
+}
+
+.about-journey-card {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border: none;
+  cursor: pointer;
+}
+
+.about-journey-card .about-journey-img {
+  width: 100%;
+  height: 100%;
+}
+
+.about-journey-card .about-journey-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.about-journey-card:hover .about-journey-img img {
+  transform: scale(1.06);
+}
+
+.about-journey-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+  transition: all 0.4s ease;
+}
+
+.about-journey-card:hover .about-journey-overlay {
+  background: linear-gradient(
+    180deg,
+    transparent 20%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+.about-journey-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.about-journey-card-featured .about-journey-label {
+  font-size: 1.6rem;
+}
+
+.about-journey-desc-small {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 280px;
+}
+
+.about-journey-card:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.about-journey-card:nth-child(3) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.about-journey-card:nth-child(4) {
+  grid-column: 2 / 4;
+  grid-row: 2;
+}
+
+.about-journey-card:nth-child(4) .about-journey-img {
+  height: 100%;
+}
+
+/* ============ SCIENTISTS SECTION ============ */
+
+.about-scientists-section {
+  padding: 90px 20px;
+  background: #faf5f3;
+}
+
+.about-scientists-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 50px;
+}
+
+.about-scientists-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(17, 26, 43, 0.55);
+}
+
+.about-scientists-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.about-scientist-card {
+  background: #ffffff;
+  border: 1px solid rgba(17, 26, 43, 0.08);
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-scientist-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(17, 26, 43, 0.1);
+  border-color: rgba(17, 26, 43, 0.15);
+}
+
+.about-scientist-img {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.about-scientist-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.about-scientist-card:hover .about-scientist-img img {
+  transform: scale(1.07);
+}
+
+.about-scientist-body {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-scientist-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111a2b;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+
+.about-scientist-field {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8b5cf6;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.about-scientist-influence {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(17, 26, 43, 0.6);
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.about-scientist-quote {
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.55;
+  color: rgba(17, 26, 43, 0.5);
+  border-left: 2px solid #8b5cf6;
+  padding-left: 14px;
+  margin: 0;
+}
+
+.about-quote-icon {
+  color: #8b5cf6;
+  font-style: italic;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+}
+
+/* ============ TOPICS ============ */
+
+.about-topics-wrapper {
+  padding: 0 40px;
+  background: #faf5f3;
+}
+
+.about-topics-section {
+  padding: 80px 20px;
+  background: #ffffff;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(17, 26, 43, 0.06);
+  border-bottom: 1px solid rgba(17, 26, 43, 0.06);
+}
+
+.about-narrow {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.about-topics-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.about-topic-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.about-topic-tag {
+  padding: 9px 18px;
+  border: 1px solid rgba(17, 26, 43, 0.12);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(17, 26, 43, 0.65);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.about-topic-tag:hover {
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.06);
+}
+
+/* ============ SUBSCRIBE — exact homepage style ============ */
+
+.about-newsletter-wrapper {
+  padding: 0 40px 40px;
+  background: #faf5f3;
+}
+
+.about-newsletter-section {
+  background: linear-gradient(135deg, #9d4d70 0%, #7d74a1 100%);
+  border-radius: 0;
+  padding: 34px 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-newsletter-inner {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.about-newsletter-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.about-newsletter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.about-newsletter-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.about-newsletter-form {
+  display: flex;
+  gap: 12px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.about-newsletter-input {
+  flex: 1;
+  padding: 13px 20px;
+  border-radius: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.about-newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.about-newsletter-input:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.about-newsletter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #221651;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  padding: 13px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+.about-newsletter-btn:hover {
+  background: #2d1e6c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(34, 22, 81, 0.3);
+}
+
+/* ============ ANIMATIONS ============ */
+
+@keyframes aboutFadeIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1200px) {
+  .about-scientists-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .about-hero-section {
+    padding: 100px 30px 0;
+  }
+
+  .about-story-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .about-story-image {
+    order: -1;
+  }
+
+  .about-story-image img {
+    height: 400px;
+  }
+
+  .about-paragraph {
+    margin: 0 auto 18px;
+  }
+
+  .about-journey-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+
+  .about-journey-card-featured {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-height: 360px;
+  }
+
+  .about-journey-card-featured .about-journey-img {
+    min-height: 360px;
+  }
+
+  .about-journey-card:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .about-journey-card:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .about-journey-card:nth-child(4) {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .about-hero-heading {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero-section {
+    padding: 90px 20px 0;
+  }
+
+  .about-hero-inner {
+    min-height: 380px;
+  }
+
+  .about-hero-content {
+    padding: 60px 24px;
+  }
+
+  .about-hero-heading {
+    font-size: 2.1rem;
+  }
+
+  .about-hero-sub {
+    font-size: 14px;
+  }
+
+  .about-story-section {
+    padding: 60px 20px;
+  }
+
+  .about-story-image img {
+    height: 320px;
+  }
+
+  .about-journey-section {
+    padding: 56px 20px 66px;
+  }
+
+  .about-journey-grid {
+    gap: 12px;
+  }
+
+  .about-journey-card-featured .about-journey-img {
+    min-height: 280px;
+  }
+
+  .about-journey-overlay {
+    padding: 20px;
+  }
+
+  .about-journey-card-featured .about-journey-label {
+    font-size: 1.3rem;
+  }
+
+  .about-scientists-section {
+    padding: 60px 20px;
+  }
+
+  .about-scientists-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .about-scientist-img {
+    height: 220px;
+  }
+
+  .about-topics-section {
+    padding: 56px 20px;
+  }
+
+  .about-newsletter-wrapper {
+    padding: 0 20px 30px;
+  }
+
+  .about-newsletter-section {
+    padding: 30px 20px;
+    border-radius: 0;
+  }
+
+  .about-newsletter-form {
+    flex-direction: column;
+  }
+
+  .about-newsletter-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero-heading {
+    font-size: 1.7rem;
+  }
+
+  .about-title {
+    font-size: 1.5rem;
+  }
+
+  .about-journey-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-journey-card:nth-child(2),
+  .about-journey-card:nth-child(3),
+  .about-journey-card:nth-child(4) {
+    grid-column: 1;
+    grid-row: auto;
+    min-height: 200px;
+  }
+
+  .about-hero-section {
+    padding: 80px 12px 0;
+  }
+
+  .about-newsletter-wrapper {
+    padding: 0 12px 24px;
+  }
+}

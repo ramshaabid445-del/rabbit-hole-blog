@@ -1,0 +1,181 @@
+/* ============== SUBSCRIBE MODAL ============== */
+
+/* Overlay — dark semi-transparent background */
+.subscribe-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+/* Modal card */
+.subscribe-modal {
+  position: relative;
+  background: linear-gradient(135deg, #9d4d70 0%, #7d74a1 100%);
+  max-width: 460px;
+  width: 100%;
+  padding: 48px 36px 40px;
+  text-align: center;
+  animation: scaleIn 0.25s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Close button (X) */
+.subscribe-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.subscribe-modal-close:hover {
+  color: #fff;
+}
+
+/* Content area */
+.subscribe-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Icon */
+.subscribe-modal-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+/* Title — matches newsletter-title */
+.subscribe-modal-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+/* Subtext — matches newsletter-text */
+.subscribe-modal-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  max-width: 380px;
+}
+
+/* Form — matches newsletter-form */
+.subscribe-modal-form {
+  display: flex;
+  gap: 12px;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Email input — matches newsletter-input */
+.subscribe-modal-input {
+  flex: 1;
+  padding: 13px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.subscribe-modal-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.subscribe-modal-input:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Subscribe button — matches newsletter .btn-dark */
+.subscribe-modal-btn {
+  background: #221651;
+  color: #fff;
+  padding: 13px 28px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.3s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.subscribe-modal-btn:hover {
+  background: #2d1e6c;
+}
+
+.subscribe-modal-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Success/Error message */
+.subscribe-modal-message {
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+}
+
+.subscribe-modal-message.success {
+  color: #a7f3d0;
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.subscribe-modal-message.error {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============== RESPONSIVE ============== */
+@media (max-width: 480px) {
+  .subscribe-modal {
+    padding: 36px 20px 32px;
+  }
+
+  .subscribe-modal-form {
+    flex-direction: column;
+  }
+
+  .subscribe-modal-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
