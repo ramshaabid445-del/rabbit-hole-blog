@@ -41,7 +41,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/articles");
+        const res = await fetch("https://rabbit-hole-blog-production.up.railway.app/api/articles");
         if (res.ok) {
           const data = await res.json();
           setArticles(data);
@@ -60,7 +60,7 @@ const HomeScreen = () => {
 
         // 1. Try the categories endpoint
         try {
-          const res = await fetch("http://localhost:5000/api/articles/categories");
+          const res = await fetch("https://rabbit-hole-blog-production.up.railway.app/api/articles/categories");
           const data = await res.json();
           if (res.ok && Array.isArray(data)) backendCats = data;
         } catch (e) {
@@ -176,7 +176,7 @@ const HomeScreen = () => {
     setNewsletterLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/subscribe", {
+      const res = await fetch("https://rabbit-hole-blog-production.up.railway.app/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: newsletterEmail }),

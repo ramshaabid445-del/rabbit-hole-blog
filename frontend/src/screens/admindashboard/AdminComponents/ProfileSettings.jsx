@@ -73,7 +73,7 @@ const ProfileSettings = ({ admin, onProfileUpdate }) => {
         payload.newPassword = form.newPassword;
       }
 
-      const res = await fetch(`http://localhost:5000/api/admin/profile/${admin.id}`, {
+      const res = await fetch(`https://rabbit-hole-blog-production.up.railway.app/api/admin/profile/${admin.id}`, {
         method: 'PUT',
         headers: getAuthHeaders(),
         body: JSON.stringify(payload),

@@ -29,7 +29,7 @@ const SubscribeModal = ({ isOpen, onClose }) => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/subscribe", {
+      const res = await fetch("https://rabbit-hole-blog-production.up.railway.app/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

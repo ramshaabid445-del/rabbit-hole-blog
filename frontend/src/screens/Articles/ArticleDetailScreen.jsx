@@ -46,7 +46,7 @@ const ArticleDetailScreen = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/articles/${id}`);
+        const res = await fetch(`https://rabbit-hole-blog-production.up.railway.app/api/articles/${id}`);
         if (!res.ok) {
           setArticle(null);
           setLoading(false);
@@ -72,7 +72,7 @@ const ArticleDetailScreen = () => {
     const checkSaved = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/subscribe/saved-articles/${subscriberEmail}`
+          `https://rabbit-hole-blog-production.up.railway.app/api/subscribe/saved-articles/${subscriberEmail}`
         );
         if (res.ok) {
           const savedArticles = await res.json();
@@ -94,7 +94,7 @@ const ArticleDetailScreen = () => {
       if (!article || !article._id) return;
 
       try {
-        const res = await fetch(`http://localhost:5000/api/comments/${article._id}`);
+        const res = await fetch(`https://rabbit-hole-blog-production.up.railway.app/api/comments/${article._id}`);
         if (res.ok) {
           const data = await res.json();
           setComments(data);
@@ -128,7 +128,7 @@ const ArticleDetailScreen = () => {
         comment: commentText,
       };
 
-      const res = await fetch("http://localhost:5000/api/comments", {
+      const res = await fetch("https://rabbit-hole-blog-production.up.railway.app/api/comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -176,7 +176,7 @@ const ArticleDetailScreen = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/subscribe/save-article", {
+      const res = await fetch("https://rabbit-hole-blog-production.up.railway.app/api/subscribe/save-article", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: subscriberEmail, articleId: article._id }),

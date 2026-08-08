@@ -96,7 +96,7 @@ const SavedBlogsScreen = () => {
     const fetchSavedArticles = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/subscribe/saved-articles/${subscriberEmail}`
+          `https://rabbit-hole-blog-production.up.railway.app/api/subscribe/saved-articles/${subscriberEmail}`
         );
         if (res.ok) {
           const data = await res.json();

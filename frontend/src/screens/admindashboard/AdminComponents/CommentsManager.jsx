@@ -10,8 +10,8 @@ const CommentsManager = () => {
     setLoading(true);
     try {
       const url = status && status !== 'all'
-        ? `http://localhost:5000/api/admin/comments?status=${status}`
-        : 'http://localhost:5000/api/admin/comments';
+        ? `https://rabbit-hole-blog-production.up.railway.app/api/admin/comments?status=${status}`
+        : 'https://rabbit-hole-blog-production.up.railway.app/api/admin/comments';
       const res = await fetch(url, { headers: getAuthHeaders() });
       const data = await res.json();
       if (res.ok) setComments(data);
@@ -26,7 +26,7 @@ const CommentsManager = () => {
 
   const handleStatus = async (id, status) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/comments/${id}`, {
+      const res = await fetch(`https://rabbit-hole-blog-production.up.railway.app/api/admin/comments/${id}`, {
         method: 'PUT',
         headers: getAuthHeaders(),
         body: JSON.stringify({ status }),
@@ -42,7 +42,7 @@ const CommentsManager = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this comment?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/comments/${id}`, {
+      const res = await fetch(`https://rabbit-hole-blog-production.up.railway.app/api/admin/comments/${id}`, {
         method: 'DELETE',
         headers: getAuthHeaders(),
       });

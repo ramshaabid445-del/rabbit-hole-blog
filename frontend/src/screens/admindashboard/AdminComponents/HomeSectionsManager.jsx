@@ -9,7 +9,7 @@ const HomeSectionsManager = () => {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/admin/home-sections', {
+      const res = await fetch('https://rabbit-hole-blog-production.up.railway.app/api/admin/home-sections', {
         headers: getAuthHeaders(),
       });
       const data = await res.json();
@@ -40,7 +40,7 @@ const HomeSectionsManager = () => {
         isFreshPerspective: p.isFreshPerspective || false,
       }));
 
-      const res = await fetch('http://localhost:5000/api/admin/home-sections', {
+      const res = await fetch('https://rabbit-hole-blog-production.up.railway.app/api/admin/home-sections', {
         method: 'PUT',
         headers: getAuthHeaders(),
         body: JSON.stringify({ updates }),

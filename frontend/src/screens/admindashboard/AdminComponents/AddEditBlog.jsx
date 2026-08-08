@@ -42,7 +42,7 @@ const AddEditBlog = ({ post, onBack }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/admin/categories', {
+        const res = await fetch('https://rabbit-hole-blog-production.up.railway.app/api/admin/categories', {
           headers: getAuthHeaders(),
         });
         const data = await res.json();
@@ -142,8 +142,8 @@ const AddEditBlog = ({ post, onBack }) => {
 
     try {
       const url = isEditing
-        ? `http://localhost:5000/api/admin/posts/${post._id}`
-        : 'http://localhost:5000/api/admin/posts';
+        ? `https://rabbit-hole-blog-production.up.railway.app/api/admin/posts/${post._id}`
+        : 'https://rabbit-hole-blog-production.up.railway.app/api/admin/posts';
       const method = isEditing ? 'PUT' : 'POST';
 
       const res = await fetch(url, {

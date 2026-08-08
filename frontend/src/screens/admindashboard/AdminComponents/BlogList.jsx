@@ -7,7 +7,7 @@ const BlogList = ({ onEdit }) => {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/admin/posts', {
+      const res = await fetch('https://rabbit-hole-blog-production.up.railway.app/api/admin/posts', {
         headers: getAuthHeaders(),
       });
       const data = await res.json();
@@ -24,7 +24,7 @@ const BlogList = ({ onEdit }) => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this post?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/posts/${id}`, {
+      const res = await fetch(`https://rabbit-hole-blog-production.up.railway.app/api/admin/posts/${id}`, {
         method: 'DELETE',
         headers: getAuthHeaders(),
       });

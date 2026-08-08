@@ -11,7 +11,7 @@ const CategoryManager = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/admin/categories', {
+      const res = await fetch('https://rabbit-hole-blog-production.up.railway.app/api/admin/categories', {
         headers: getAuthHeaders(),
       });
       const data = await res.json();
@@ -36,8 +36,8 @@ const CategoryManager = () => {
 
     try {
       const url = editing
-        ? `http://localhost:5000/api/admin/categories/${editing._id}`
-        : 'http://localhost:5000/api/admin/categories';
+        ? `https://rabbit-hole-blog-production.up.railway.app/api/admin/categories/${editing._id}`
+        : 'https://rabbit-hole-blog-production.up.railway.app/api/admin/categories';
       const method = editing ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -71,7 +71,7 @@ const CategoryManager = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this category?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/categories/${id}`, {
+      const res = await fetch(`https://rabbit-hole-blog-production.up.railway.app/api/admin/categories/${id}`, {
         method: 'DELETE',
         headers: getAuthHeaders(),
       });

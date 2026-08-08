@@ -128,7 +128,7 @@ const ArticlesScreen = () => {
 
         // 1. Try the categories endpoint
         try {
-          const res = await fetch("http://localhost:5000/api/articles/categories");
+          const res = await fetch("https://rabbit-hole-blog-production.up.railway.app/api/articles/categories");
           const data = await res.json();
           if (res.ok && Array.isArray(data)) backendCats = data;
         } catch (e) {
@@ -137,7 +137,7 @@ const ArticlesScreen = () => {
 
         // 2. Also derive categories from articles (always reliable)
         try {
-          const res = await fetch("http://localhost:5000/api/articles");
+          const res = await fetch("https://rabbit-hole-blog-production.up.railway.app/api/articles");
           const data = await res.json();
           if (res.ok && Array.isArray(data)) {
             const articleCats = [...new Set(data.map((a) => a.category).filter(Boolean))]
@@ -168,7 +168,7 @@ const ArticlesScreen = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/articles");
+        const res = await fetch("https://rabbit-hole-blog-production.up.railway.app/api/articles");
         if (res.ok) {
           const data = await res.json();
           setArticles(data);

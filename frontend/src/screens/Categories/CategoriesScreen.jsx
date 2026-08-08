@@ -145,7 +145,7 @@ const CategoriesScreen = () => {
 
         // 1. Try the categories endpoint
         try {
-          const res = await fetch('http://localhost:5000/api/articles/categories');
+          const res = await fetch('https://rabbit-hole-blog-production.up.railway.app/api/articles/categories');
           const data = await res.json();
           if (res.ok && Array.isArray(data)) backendCats = data;
         } catch (e) {
@@ -154,7 +154,7 @@ const CategoriesScreen = () => {
 
         // 2. Also derive categories from articles (always reliable)
         try {
-          const res = await fetch('http://localhost:5000/api/articles');
+          const res = await fetch('https://rabbit-hole-blog-production.up.railway.app/api/articles');
           const articleData = await res.json();
           if (res.ok && Array.isArray(articleData)) {
             // Count articles per category for accurate display

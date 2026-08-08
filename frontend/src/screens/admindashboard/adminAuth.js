@@ -4,7 +4,7 @@
  * Automatically adds JWT token to headers and handles 401 redirects.
  */
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "https://rabbit-hole-blog-production.up.railway.app/api";
 
 /**
  * Get the auth headers with JWT token
