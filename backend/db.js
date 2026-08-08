@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 const dns = require("dns");
 
-//  force Node.js to use Google DNS servers 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: "philosphdb",
+    });
     console.log("✅ MongoDB connected successfully");
+    console.log("📂 Connected to database:", conn.connection.name);
   } catch (error) {
     console.error("❌ MongoDB connection failed:", error.message);
   }
