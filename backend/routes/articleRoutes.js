@@ -15,11 +15,13 @@ router.get("/debug/count", async (req, res) => {
     const count = await Post.countDocuments();
     const dbName = Post.db.name;
     const sample = await Post.findOne();
+    const collections = await Post.db.db.listCollections().toArray();
     res.json({
       totalCount: count,
       connectedDatabase: dbName,
       sampleDocExists: !!sample,
       sampleTitle: sample ? sample.title : null,
+      allCollectionsInThisDB: collections.map((c) => c.name),
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
