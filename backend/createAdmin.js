@@ -30,7 +30,14 @@ const createAdmin = async () => {
       process.exit(1);
     }
 
-    // Check if admin already exists
+    // TEMPORARY: delete existing admin to recreate with correct password
+    // Remove this block once login is confirmed working.
+    const deleted = await User.deleteOne({ email: adminEmail });
+    if (deleted.deletedCount > 0) {
+      console.log("🗑️  Deleted existing admin with email:", adminEmail);
+    }
+
+    // Check if admin already exists (should be false now, since we just deleted it)
     const existing = await User.findOne({ email: adminEmail });
     if (existing) {
       console.log("⚠️ Admin user already exists with email:", adminEmail);

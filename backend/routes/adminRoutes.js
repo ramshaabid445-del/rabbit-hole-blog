@@ -13,6 +13,37 @@ const { validate } = require("../middleware/validationMiddleware");
 const router = express.Router();
 
 // ============================================================
+// TEMPORARY DEBUG ROUTE - remove after fixing login issue
+// ============================================================
+
+/**
+ * GET /api/admin/debug/test-login
+ * Tests whether the hardcoded admin credentials match what's in the DB.
+ */
+router.get("/debug/test-login", async (req, res) => {
+  try {
+    const testEmail = "ramsha.blogs@gmail.com";
+    const testPassword = "Adminramsha@123";
+
+    const user = await User.findOne({ email: testEmail });
+    if (!user) {
+      return res.json({ found: false, message: "User not found in DB" });
+    }
+
+    const isMatch = await bcrypt.compare(testPassword, user.password);
+
+    res.json({
+      found: true,
+      emailInDB: user.email,
+      passwordHashPrefix: user.password.substring(0, 10),
+      testPasswordMatches: isMatch,
+    });
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
+// ============================================================
 // AUTHENTICATION
 // ============================================================
 
