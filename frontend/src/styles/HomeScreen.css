@@ -1225,13 +1225,17 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 90px 20px 30px;
+    padding: 60px 20px 24px;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-inner {
     min-height: auto;
     padding: 40px 24px;
     border-radius: 0;
+    position: relative;
+    z-index: 1;
     background-image:
       linear-gradient(180deg, #faf5f3 0%, rgba(250, 245, 243, 0.9) 55%, rgba(250, 245, 243, 0.75) 100%),
       var(--hero-bg-image);
@@ -1250,7 +1254,7 @@
   }
 
   .featured-wrapper {
-    padding: 0;
+    padding: 0 0 20px;
   }
 
   .featured-section {
@@ -1267,7 +1271,7 @@
   }
 
   .thoughts-wrapper {
-    padding: 0;
+    padding: 0 0 20px;
   }
 
   .thoughts-grid {
@@ -1294,7 +1298,9 @@
 
   /* ============ EDITOR'S PICK MOBILE ============ */
   .editors-wrapper {
-    padding: 0;
+    padding: 0 0 28px;
+    position: relative;
+    z-index: 1;
   }
 
   .editors-section {
@@ -1337,9 +1343,26 @@
     max-width: 100%;
   }
 
+  /* ============ QUOTE WRAPPER MOBILE FIX ============ */
+  .home-quote-wrapper {
+    padding: 0 20px 40px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .home-quote-section {
+    min-height: 300px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .home-quote-content {
+    padding: 40px 24px;
+  }
+
   /* ============ EXPLORE BY TOPIC MOBILE ============ */
   .home-topics-wrapper {
-    padding: 0;
+    padding: 0 0 20px;
   }
 
   .home-topics-section {
