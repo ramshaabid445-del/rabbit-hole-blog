@@ -7,6 +7,26 @@ const { validate } = require("../middleware/validationMiddleware");
 const router = express.Router();
 
 /**
+ * TEMPORARY DEBUG ROUTE - remove after fixing
+ * GET /api/articles/debug/count
+ */
+router.get("/debug/count", async (req, res) => {
+  try {
+    const count = await Post.countDocuments();
+    const dbName = Post.db.name;
+    const sample = await Post.findOne();
+    res.json({
+      totalCount: count,
+      connectedDatabase: dbName,
+      sampleDocExists: !!sample,
+      sampleTitle: sample ? sample.title : null,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
  * GET /api/articles/categories
  * Public endpoint to fetch all categories (for frontend display).
  */
