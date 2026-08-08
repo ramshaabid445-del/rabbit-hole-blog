@@ -14,17 +14,24 @@ router.get("/debug/count", async (req, res) => {
   try {
     const count = await Post.countDocuments();
     const dbName = Post.db.name;
+    const host = Post.db.host;
     const sample = await Post.findOne();
     const collections = await Post.db.db.listCollections().toArray();
+    const rawCount = await Post.db.db.collection("posts").countDocuments();
+    const rawFind = await Post.db.db.collection("posts").find({}).limit(3).toArray();
+
     res.json({
       totalCount: count,
       connectedDatabase: dbName,
+      connectedHost: host,
       sampleDocExists: !!sample,
       sampleTitle: sample ? sample.title : null,
       allCollectionsInThisDB: collections.map((c) => c.name),
+      rawCollectionCount: rawCount,
+      rawFindResult: rawFind,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message, stack: error.stack });
   }
 });
 
