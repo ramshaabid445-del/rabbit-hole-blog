@@ -13,37 +13,6 @@ const { validate } = require("../middleware/validationMiddleware");
 const router = express.Router();
 
 // ============================================================
-// TEMPORARY DEBUG ROUTE - remove after fixing login issue
-// ============================================================
-
-/**
- * GET /api/admin/debug/test-login
- * Tests whether the hardcoded admin credentials match what's in the DB.
- */
-router.get("/debug/test-login", async (req, res) => {
-  try {
-    const testEmail = "ramsha.blogs@gmail.com";
-    const testPassword = "Adminramsha@123";
-
-    const user = await User.findOne({ email: testEmail });
-    if (!user) {
-      return res.json({ found: false, message: "User not found in DB" });
-    }
-
-    const isMatch = await bcrypt.compare(testPassword, user.password);
-
-    res.json({
-      found: true,
-      emailInDB: user.email,
-      passwordHashPrefix: user.password.substring(0, 10),
-      testPasswordMatches: isMatch,
-    });
-  } catch (error) {
-    res.json({ error: error.message });
-  }
-});
-
-// ============================================================
 // AUTHENTICATION
 // ============================================================
 
@@ -60,8 +29,7 @@ router.post(
       .notEmpty()
       .withMessage("Email is required")
       .isEmail()
-      .withMessage("Valid email is required")
-      .normalizeEmail(),
+      .withMessage("Valid email is required"),
     body("password")
       .notEmpty()
       .withMessage("Password is required"),
@@ -71,7 +39,7 @@ router.post(
     try {
       const { email, password } = req.body;
 
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email: email.trim().toLowerCase() });
       if (!user) {
         return res.status(401).json({ message: "Invalid email or password" });
       }
@@ -551,8 +519,7 @@ router.put(
       .optional()
       .trim()
       .isEmail()
-      .withMessage("Valid email is required")
-      .normalizeEmail(),
+      .withMessage("Valid email is required"),
     body("newPassword")
       .optional()
       .isLength({ min: 6 })
