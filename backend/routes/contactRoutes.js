@@ -53,12 +53,13 @@ router.post(
         });
       }
 
-      // Create transporter with port 587 (STARTTLS) instead of 465
+      // Create transporter — force IPv4 since Railway doesn't support IPv6 outbound
       const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
         secure: false,
         requireTLS: true,
+        family: 4,
         auth: {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASS,
