@@ -1,10 +1,11 @@
 const express = require("express");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 const { body } = require("express-validator");
 const Contact = require("../models/Contact");
 const { validate } = require("../middleware/validationMiddleware");
 
 const router = express.Router();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 /**
  * POST /api/contact
@@ -45,82 +46,59 @@ router.post(
     try {
       const { name, email, subject, message } = req.body;
 
-      // Check if email credentials exist
-      if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        console.error("Missing email credentials in .env");
+      if (!process.env.RESEND_API_KEY || !process.env.EMAIL_USER) {
+        console.error("Missing Resend API key or admin email in env");
         return res.status(500).json({
           message: "Email not configured. Contact admin.",
         });
       }
 
-      // Create transporter — force IPv4 since Railway doesn't support IPv6 outbound
-      const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false,
-        requireTLS: true,
-        family: 4,
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-        connectionTimeout: 10000,
-      });
+      const html = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
+          <h2 style="color: #111a2b; margin-bottom: 20px;">New Contact Form Submission</h2>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #6d74a1;">Name</td>
+              <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; color: #111a2b;">${name}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #6d74a1;">Email</td>
+              <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; color: #111a2b;">${email}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #6d74a1;">Subject</td>
+              <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; color: #111a2b;">${subject}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; vertical-align: top; font-weight: 600; color: #6d74a1;">Message</td>
+              <td style="padding: 10px; color: #111a2b; line-height: 1.6;">${message}</td>
+            </tr>
+          </table>
+          <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
+          <p style="font-size: 12px; color: #9ca3af; text-align: center;">
+            Sent from The Rabbit Hole blog contact form
+          </p>
+        </div>
+      `;
 
-      const mailOptions = {
-        from: `"${name}" <${process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_USER,
-        replyTo: email,
-        subject: `[Blog Contact] ${subject}`,
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-            <h2 style="color: #111a2b; margin-bottom: 20px;">New Contact Form Submission</h2>
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #6d74a1;">Name</td>
-                <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; color: #111a2b;">${name}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #6d74a1;">Email</td>
-                <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; color: #111a2b;">${email}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #6d74a1;">Subject</td>
-                <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; color: #111a2b;">${subject}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px; vertical-align: top; font-weight: 600; color: #6d74a1;">Message</td>
-                <td style="padding: 10px; color: #111a2b; line-height: 1.6;">${message}</td>
-              </tr>
-            </table>
-            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
-            <p style="font-size: 12px; color: #9ca3af; text-align: center;">
-              Sent from The Rabbit Hole blog contact form
-            </p>
-          </div>
-        `,
-      };
-
-      // Send email — if this fails, show the ACTUAL error to user
       try {
-        const info = await transporter.sendMail(mailOptions);
-        console.log("Email sent successfully!");
-        console.log("Message ID:", info.messageId);
-      } catch (mailError) {
-        console.error("=== EMAIL SEND ERROR ===");
-        console.error("Error code:", mailError.code);
-        console.error("Error message:", mailError.message);
+        const { data, error } = await resend.emails.send({
+          from: "The Rabbit Hole <onboarding@resend.dev>",
+          to: process.env.EMAIL_USER,
+          reply_to: email,
+          subject: `[Blog Contact] ${subject}`,
+          html,
+        });
 
-        let errorMsg = "Failed to send email. ";
-        if (mailError.code === "EAUTH") {
-          errorMsg += "Invalid Gmail credentials. App password may be wrong.";
-        } else if (mailError.code === "ECONNECTION") {
-          errorMsg += "Cannot connect to Gmail SMTP.";
-        } else {
-          errorMsg += mailError.message;
+        if (error) {
+          console.error("=== EMAIL SEND ERROR ===", error);
+          return res.status(500).json({ message: "Failed to send email. " + error.message });
         }
 
-        return res.status(500).json({ message: errorMsg });
+        console.log("Email sent successfully! ID:", data?.id);
+      } catch (mailError) {
+        console.error("=== EMAIL SEND ERROR ===", mailError.message);
+        return res.status(500).json({ message: "Failed to send email. " + mailError.message });
       }
 
       // Only save to DB if email was sent successfully
