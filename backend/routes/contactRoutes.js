@@ -46,8 +46,8 @@ router.post(
     try {
       const { name, email, subject, message } = req.body;
 
-      if (!process.env.RESEND_API_KEY || !process.env.EMAIL_USER) {
-        console.error("Missing Resend API key or admin email in env");
+      if (!process.env.RESEND_API_KEY) {
+        console.error("Missing Resend API key in env");
         return res.status(500).json({
           message: "Email not configured. Contact admin.",
         });
@@ -84,7 +84,7 @@ router.post(
       try {
         const { data, error } = await resend.emails.send({
           from: "The Rabbit Hole <onboarding@resend.dev>",
-          to: process.env.EMAIL_USER,
+          to: "ramshaabid752@gmail.com",
           reply_to: email,
           subject: `[Blog Contact] ${subject}`,
           html,
